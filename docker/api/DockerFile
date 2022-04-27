@@ -3,12 +3,15 @@ FROM php:8.1-fpm
 RUN apt-get update
 RUN apt-get install
 
-RUN chown www-data:www-data -r /var/www/html
+RUN chown www-data:www-data /var/www/html
 
 WORKDIR /var/www/html
 
 EXPOSE 9000
 
 COPY ./php-fpm.conf /usr/local/etc/
+COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
+RUN composer install
 
 CMD 'php-fpm'

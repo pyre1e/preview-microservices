@@ -10,6 +10,8 @@ services:
       - ./docker/nginx:/etc/nginx/conf.d/
       - ./api:/var/www/html
       - ./var/nginx:/var/log/nginx
+    depends_on:
+      - api
 
   api:
     image: api
