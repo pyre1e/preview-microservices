@@ -1,0 +1,22 @@
+version: "3.3"
+
+services:
+  nginx:
+    image: nginx:latest
+    container_name: ${APP_NAME}-nginx
+    ports:
+      - 80:80
+    volumes:
+      - ./docker/nginx:/etc/nginx/conf.d/
+      - ./api:/var/www/html
+      - ./var/nginx:/var/log/nginx
+
+  api:
+    image: api
+    container_name: ${APP_NAME}-api
+    build: 
+      context: docker/api
+      dockerfile: DockerFile
+    volumes:
+      - ./api:/var/www/html
+      - ./var/api:/var/log

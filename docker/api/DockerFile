@@ -1,0 +1,14 @@
+FROM php:8.1-fpm
+
+RUN apt-get update
+RUN apt-get install
+
+RUN chown www-data:www-data -r /var/www/html
+
+WORKDIR /var/www/html
+
+EXPOSE 9000
+
+COPY ./php-fpm.conf /usr/local/etc/
+
+CMD 'php-fpm'
